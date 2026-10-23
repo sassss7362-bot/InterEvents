@@ -1,0 +1,24 @@
+name: InterEvents
+version: '${project.version}'
+main: ua.intertime.interevents.InterEvents
+api-version: '1.16'
+author: InterTime
+description: Великий плагін на івенти для сервера InterTime
+commands:
+  event:
+    description: Керування івентами
+    aliases: [events, ie]
+    usage: /event help
+permissions:
+  interevents.use:
+    description: Участь в івентах
+    default: true
+  interevents.admin:
+    description: Керування івентами
+    default: op
+  interevents.bypass:
+    description: Обхід обмежень та античіта в івентах
+    default: op
+  interevents.alerts:
+    description: Бачити сповіщення античіта
+    default: op

@@ -1,0 +1,221 @@
+# ============================================================
+#  InterEvents — конфігурація (Paper 1.16.5 - 26.x)
+#  Кольори: &a, &6 ... Команди нагород виконуються від консолі.
+#  Плейсхолдери: %player% %place% %event%
+# ============================================================
+
+settings:
+  prefix: "&8[&6Інтер&eІвенти&8] &7"
+  allowed-commands: [event, events, ie, msg, tell, w, r, reply]
+
+# Автоматичний запуск випадкових світових подій
+auto:
+  enabled: false
+  interval-minutes: 30
+  min-online: 3
+  events: []        # порожньо = усі; приклад: [mysticchest, deathchest, meteor]
+
+# Зона події: політ вимкнено, tp-команди заборонені
+zone:
+  disable-fly: true
+
+# ---------------- Античіт (діє на гравців у зоні події) ----------------
+anticheat:
+  enabled: true
+  # команди при досягненні max-vl (гравця також позбавляє участі в події). Приклад: "kick %player% Читерство (%check%)"
+  punish-commands: []
+  zone-blocked-commands: [spawn, hub, home, homes, sethome, warp, warps, tpa, tpaccept, tpahere, tp, tpo, rtp, wild, back, fly, ec, enderchest, kit, kits, god, heal, feed, gamemode, gm, vanish, v, pwarp]
+  checks:
+    speed:         { enabled: true, max-bps: 13.0, max-vl: 6, decay: 1.0 }
+    fly:           { enabled: true, max-air-moves: 18, max-vl: 6, decay: 1.0 }
+    reach:         { enabled: true, flag: 4.8, cancel: 6.0, max-vl: 8, decay: 1.0 }
+    cps:           { enabled: true, max-cps: 22, max-vl: 6, decay: 1.0 }
+    nuker:         { enabled: true, max-distance: 6.5, max-per-second: 14, max-vl: 6, decay: 1.0 }
+    gamemode:      { enabled: true, max-vl: 4 }
+    teleport:      { enabled: true }
+    zone-commands: { enabled: true }
+
+# ---------------- Унікальні предмети: числові параметри ----------------
+unique:
+  abilities-enabled: true
+  talisman_dragon:  { damage-bonus: 0.12 }                 # +12% до шкоди
+  talisman_phoenix: { heal: 12.0, cooldown: 180 }           # рятує від смерті раз на 180 с
+  talisman_vampire: { lifesteal: 0.15 }                     # 15% шкоди повертається як HP
+  talisman_titan:   { damage-reduction: 0.12 }              # -12% вхідної шкоди
+  talisman_griffin: { speed-level: 0 }                      # Швидкість I + без шкоди від падіння
+  sphere_chaos:     { chance: 0.2, radius: 7, cooldown: 45 }
+  sphere_ice:       { chance: 0.25, radius: 7, freeze-seconds: 3, cooldown: 35 }
+  sphere_fire:      { chance: 0.2, radius: 6, damage: 4.0, cooldown: 30 }
+  sphere_life:      { heal: 8.0, cooldown: 60 }
+  sphere_shadow:    { power: 1.8, cooldown: 15 }
+
+# ---------------- Предмети (/event give <гравець|*> <id> [к-сть]) ----------------
+items:
+  talisman_dragon:
+    material: DRAGON_BREATH
+    name: "&c&lТалісман Дракона"
+    lore: ["&7Тримайте в інвентарі.", "", "&c▸ &7+12% до вашої шкоди", "", "&8Унікальний предмет"]
+    glow: true
+  talisman_phoenix:
+    material: BLAZE_POWDER
+    name: "&6&lТалісман Фенікса"
+    lore: ["&7Тримайте в інвентарі.", "", "&6▸ &7Рятує від смертельного удару", "&6▸ &7Перезарядка: 3 хвилини", "", "&8Унікальний предмет"]
+    glow: true
+  talisman_vampire:
+    material: GHAST_TEAR
+    name: "&4&lТалісман Вампіра"
+    lore: ["&7Тримайте в інвентарі.", "", "&4▸ &7Повертає 15% завданої шкоди як здоров'я", "", "&8Унікальний предмет"]
+    glow: true
+  talisman_titan:
+    material: NETHERITE_SCRAP
+    name: "&8&lТалісман Титана"
+    lore: ["&7Тримайте в інвентарі.", "", "&8▸ &7-12% отриманої шкоди", "", "&8Унікальний предмет"]
+    glow: true
+  talisman_griffin:
+    material: FEATHER
+    name: "&b&lТалісман Грифона"
+    lore: ["&7Тримайте в інвентарі.", "", "&b▸ &7Швидкість I", "&b▸ &7Немає шкоди від падіння", "", "&8Унікальний предмет"]
+    glow: true
+
+  sphere_chaos:
+    material: ENDER_EYE
+    name: "&5&lСфера Хаосу"
+    lore: ["&7Тримайте в руці (основній або лівій).", "", "&5▸ &7Удар: 20% випадковий дебаф", "&5▸ &7ПКМ: хаос на всіх навколо (45 c)", "", "&8Унікальна сфера"]
+    glow: true
+  sphere_ice:
+    material: HEART_OF_THE_SEA
+    name: "&b&lСфера Льоду"
+    lore: ["&7Тримайте в руці (основній або лівій).", "", "&b▸ &7Удар: 25% сповільнення", "&b▸ &7ПКМ: заморозка ворогів навколо (35 c)", "", "&8Унікальна сфера"]
+    glow: true
+  sphere_fire:
+    material: MAGMA_CREAM
+    name: "&6&lСфера Вогню"
+    lore: ["&7Тримайте в руці (основній або лівій).", "", "&6▸ &7Стійкість до вогню", "&6▸ &7Удар: 20% підпал", "&6▸ &7ПКМ: вогняне кільце (30 c)", "", "&8Унікальна сфера"]
+    glow: true
+  sphere_life:
+    material: NETHER_STAR
+    name: "&a&lСфера Життя"
+    lore: ["&7Тримайте в руці (основній або лівій).", "", "&a▸ &7Регенерація", "&a▸ &7ПКМ: миттєве лікування (60 c)", "", "&8Унікальна сфера"]
+    glow: true
+  sphere_shadow:
+    material: INK_SAC
+    name: "&8&lСфера Тіней"
+    lore: ["&7Тримайте в руці (основній або лівій).", "", "&8▸ &7Нічний зір", "&8▸ &7ПКМ: ривок і невидимість (15 c)", "", "&8Унікальна сфера"]
+    glow: true
+
+  trophy:
+    material: GOLDEN_APPLE
+    name: "&e&lТрофей переможця"
+    lore: ["&7Нагорода за перемогу в івенті"]
+    glow: true
+  key:
+    material: TRIPWIRE_HOOK
+    name: "&b&lІвент-ключ"
+    lore: ["&7Рідкісний ключ"]
+    glow: true
+
+# ---------------- Події ----------------
+# radius = на якій відстані від центру (/event setarena <id|all>, або спавн світу) може з'явитись подія.
+# loot / unique-pool: "НАЗВА:мін-макс:шанс%" (назва = матеріал або id предмета з розділу items),
+# unique-pool: "id:вага". unique-count - скільки унікальних предметів кладеться в сундук.
+events:
+  mysticchest:
+    enabled: true
+    display-name: "&d&l✦ Містичний сундук ✦"
+    radius: 400
+    zone-radius: 15
+    warn-seconds: 15       # промінь і коло перед падінням
+    lock-seconds: 180      # скільки сундук зачинений (PvP за зону)
+    open-seconds: 90       # скільки відкритий
+    unique-count: 2
+    unique-pool: ["talisman_dragon:10", "talisman_phoenix:6", "talisman_vampire:10", "talisman_titan:8", "talisman_griffin:10",
+                  "sphere_chaos:8", "sphere_ice:8", "sphere_fire:8", "sphere_life:6", "sphere_shadow:8"]
+    loot: ["DIAMOND:3-8:100", "GOLDEN_APPLE:2-5:90", "EMERALD:5-15:80", "ENDER_PEARL:2-6:70", "NETHERITE_SCRAP:1-3:40", "EXPERIENCE_BOTTLE:8-24:80"]
+    rewards:
+      1: ["event give %player% key 1"]
+
+  deathchest:
+    enabled: true
+    display-name: "&4&l☠ Сундук смерті ☠"
+    radius: 400
+    zone-radius: 18
+    warn-seconds: 15
+    waves: 3
+    guardians-base: 4
+    curse-damage: 1.0      # шкода прокляття раз на 5 c (0 = вимкнути)
+    open-seconds: 90
+    timeout-seconds: 900
+    unique-count: 3
+    unique-pool: ["talisman_phoenix:10", "talisman_vampire:10", "talisman_titan:10", "talisman_dragon:10",
+                  "sphere_chaos:12", "sphere_ice:12", "sphere_fire:12", "sphere_life:10", "sphere_shadow:12"]
+    loot: ["DIAMOND:6-14:100", "NETHERITE_INGOT:1-2:35", "GOLDEN_APPLE:3-6:90", "ENCHANTED_GOLDEN_APPLE:1:25", "TOTEM_OF_UNDYING:1:30", "EXPERIENCE_BOTTLE:16-40:100"]
+    rewards:
+      1: ["event give %player% trophy 1", "event give %player% key 2"]
+
+  meteor:
+    enabled: true
+    display-name: "&6&l☄ Метеорит ☄"
+    radius: 400
+    zone-radius: 20
+    warn-seconds: 20
+    mine-seconds: 240
+    ore-count: 9
+    impact-damage: 6.0
+    unique-chance: 0.15    # шанс унікального предмета з кожного шматка руди
+    unique-pool: ["talisman_dragon:10", "talisman_vampire:10", "talisman_titan:8", "talisman_griffin:10",
+                  "sphere_chaos:8", "sphere_ice:8", "sphere_fire:8", "sphere_shadow:8"]
+    loot: ["IRON_INGOT:4-10:100", "GOLD_INGOT:3-8:80", "DIAMOND:1-3:50", "EXPERIENCE_BOTTLE:4-12:80", "NETHERITE_SCRAP:1:15"]
+    rewards:
+      1: ["give %player% diamond 8", "event give %player% key 1"]
+      2: ["give %player% diamond 4"]
+      3: ["give %player% gold_ingot 10"]
+      participation: ["give %player% iron_ingot 8"]
+
+  airdrop:
+    enabled: true
+    display-name: "&6&l✈ Небесний дар ✈"
+    radius: 400
+    warn-seconds: 10
+    capture-seconds: 12
+    open-seconds: 45
+    timeout-seconds: 900
+    unique-count: 1
+    unique-pool: ["talisman_griffin:10", "talisman_titan:8", "sphere_life:8", "sphere_shadow:8", "sphere_ice:8"]
+    loot: ["DIAMOND:2-5:100", "GOLDEN_APPLE:1-3:80", "IRON_INGOT:8-24:100", "EMERALD:3-10:60", "ENDER_PEARL:1-3:50", "COOKED_BEEF:16-32:100"]
+    rewards:
+      1: ["event give %player% key 1"]
+
+  worldboss:
+    enabled: true
+    display-name: "&c&lСтраж Безодні"
+    radius: 150
+    zone-radius: 40
+    intro-seconds: 8
+    health: 3000
+    health-per-player: 250
+    damage-multiplier: 2.0
+    lightning-damage: 8.0
+    shockwave-damage: 5.0
+    min-damage: 50
+    timeout-seconds: 900
+    rewards:
+      1: ["event give %player% sphere_chaos 1", "event give %player% talisman_dragon 1", "give %player% diamond 16"]
+      2: ["event give %player% talisman_vampire 1", "give %player% diamond 8"]
+      3: ["event give %player% talisman_titan 1", "give %player% diamond 4"]
+      participation: ["give %player% gold_ingot 5"]
+      last-hit: ["event give %player% sphere_shadow 1", "give %player% emerald 10"]
+
+  chatgame:
+    enabled: true
+    display-name: "&b&lЧат-гра"
+    rounds: 3
+    answer-seconds: 30
+    min-answer-ms: 600     # швидше = підозра на бота, приз не видається
+    words: [minecraft, diamond, creeper, enderman, redstone, netherite, pickaxe, villager, skeleton, obsidian]
+    rewards:
+      1: ["give %player% diamond 1"]
+
+# ---------------- Повідомлення ----------------
+messages:
+  busy: "&cЦей івент вже запущений."
+  command-blocked: "&cУ зоні івенту ця команда заборонена."
